@@ -22,7 +22,7 @@ struct BasicEnemy{ // Holds the top left and bottom right of the image, with a m
     int y;
     int bottomx;
     int bottomy;
-    Texture2D enemyimage = LoadTexture("enemy1.png");
+    Texture2D enemyimage = LoadTexture("Graphics/enemy1.png");
     
     void updateframe(){
         if(moveBacknForth){ //If moveBacknForth is true, this tells the enemy how to do that 
