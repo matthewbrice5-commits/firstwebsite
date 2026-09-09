@@ -196,7 +196,7 @@ int main(void)
         
 
         //SHOOTING
-        if (IsMouseButtonPressed(0)){
+        if (IsKeyPressed(KEY_ENTER)){
             //When the mouse is pressed, create a new strcut with the bullet x and y being (35,17) from the users
             // then update the y axis by increasing by 8 everytime after
             
