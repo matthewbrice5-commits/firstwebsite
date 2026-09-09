@@ -94,7 +94,7 @@ int main(void)
     
 
     InitWindow(screenWidth, screenHeight, "Galaca Game - Singplayer");
-    Image icon = LoadImage("user.png");
+    Image icon = LoadImage("Graphics/user.png");
     SetWindowIcon(icon);
     UnloadImage(icon);
     
