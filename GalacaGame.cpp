@@ -90,7 +90,7 @@ int main(void)
     int backgroundY1 = 0;
 	int backgroundY2 = -900;
     
-    int speed = 5;
+    float speed = .22;
     
 
     InitWindow(screenWidth, screenHeight, "Galaca Game - Singplayer");
@@ -169,28 +169,64 @@ int main(void)
         ClearBackground(BLACK);
         
         //MOVEMENT
+        bool moving = false; 
+        
+        float dx, dy;//These will be used for the calculations for diagonal speed
+        
+        if (IsKeyDown(KEY_A)) dx -= 1;
+        if (IsKeyDown(KEY_D)) dx += 1;
+        if (IsKeyDown(KEY_W)) dy -= 1;
+        if (IsKeyDown(KEY_S)) dy += 1;
+
+        if (dx != 0 || dy != 0) {
+            userpositionx += dx * speed;
+            userpositiony += dy * speed;
+
+            // Clamp to screen bounds
+            if (userpositionx < 0)   userpositionx = 0;
+            if (userpositionx > 530) userpositionx = 530;
+            if (userpositiony < 200) userpositiony = 200;
+            if (userpositiony > 865) userpositiony = 865;
+
+            if (dx < 0)      currentusersprite = userspriteleft;
+            else if (dx > 0) currentusersprite = userspriteright;
+            else             currentusersprite = usersprite;
+                 } else {
+                    currentusersprite = usersprite;
+                    }
+        
+        
         if (IsKeyDown(KEY_A)) {// This code runs only once each frame, when a button is pressed 
+            
             if (userpositionx != 0){// Sets the border ie. cannot go too far left
             userpositionx-= speed;
             currentusersprite = userspriteleft;
+            moving = true;
             }
             
-        } else if (IsKeyDown(KEY_D)){// Sets the border ie. cannot go too far right
+        }  
+        if (IsKeyDown(KEY_D)){// Sets the border ie. cannot go too far right
             if (userpositionx != 530){
             userpositionx+= speed;
             currentusersprite = userspriteright;
+            moving = true;
             }
-        } else if (IsKeyDown(KEY_W)) {
+        }
+        if (IsKeyDown(KEY_W)) {
             if (userpositiony != 200){
                 userpositiony -= speed;
                 currentusersprite = usersprite;
+                moving = true;
             }
-        } else if (IsKeyDown(KEY_S)){
+        }
+        if (IsKeyDown(KEY_S)){
             if (userpositiony != 865){
                 userpositiony += speed;
                 currentusersprite = usersprite;
+                moving = true;
             }
-        } else {
+        } 
+        if(!moving){
             currentusersprite = usersprite;
         }
         
